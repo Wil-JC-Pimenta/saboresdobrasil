@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Descubra as melhores receitas da culinária brasileira. Aprenda a fazer pratos típicos com receitas detalhadas e dicas especiais."
+    />
+    <meta
+      name="keywords"
+      content="receitas brasileiras, comida brasileira, culinária brasileira, feijoada, moqueca, pão de queijo"
+    />
+    <title>Sabores do Brasil - Receitas Típicas Brasileiras</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary-color: #2c8b3c;
+        --secondary-color: #ffc107;
+        --text-color: #333;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        color: var(--text-color);
+        line-height: 1.6;
+      }
+
+      .hero-section {
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+          url("/api/placeholder/1200/400");
+        background-size: cover;
+        background-position: center;
+        color: white;
+        padding: 100px 0;
+        margin-bottom: 40px;
+      }
+
+      .recipe-card {
+        border-radius: 15px;
+        overflow: hidden;
+        transition: transform 0.3s ease;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .recipe-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .recipe-image {
+        height: 200px;
+        object-fit: cover;
+      }
+
+      .recipe-info {
+        padding: 20px;
+      }
+
+      .recipe-tags {
+        margin: 10px 0;
+      }
+
+      .recipe-tag {
+        background-color: var(--secondary-color);
+        color: #000;
+        padding: 5px 10px;
+        border-radius: 20px;
+        font-size: 0.8em;
+        margin-right: 5px;
+      }
+
+      .recipe-time {
+        color: var(--primary-color);
+        font-weight: bold;
+      }
+
+      .recipe-modal .modal-content {
+        border-radius: 15px;
+      }
+
+      .ingredients-list {
+        list-style-type: none;
+        padding-left: 0;
+      }
+
+      .ingredients-list li {
+        padding: 5px 0;
+        border-bottom: 1px solid #eee;
+      }
+
+      .steps-list {
+        padding-left: 20px;
+      }
+
+      .steps-list li {
+        margin-bottom: 15px;
+      }
+
+      @media (max-width: 768px) {
+        .hero-section {
+          padding: 50px 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+      <div class="container">
+        <a class="navbar-brand" href="#">Sabores do Brasil</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#receitas">Receitas</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#sobre">Sobre</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#contato">Contato</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section text-center">
+      <div class="container">
+        <h1 class="display-4 mb-4">Descubra os Sabores do Brasil</h1>
+        <p class="lead">
+          As melhores receitas típicas brasileiras em um só lugar
+        </p>
+      </div>
+    </section>
+
+    <!-- Recipes Section -->
+    <section id="receitas" class="container mb-5">
+      <h2 class="text-center mb-4">Top 10 Receitas Brasileiras</h2>
+      <div class="row" id="recipes-container">
+        <!-- Recipes will be inserted here by JavaScript -->
+      </div>
+    </section>
+
+    <!-- Recipe Modal -->
+    <div class="modal fade recipe-modal" id="recipeModal" tabindex="-1">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title"></h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <!-- Recipe details will be inserted here -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+      const recipes = [
+        {
+          id: 1,
+          title: "Feijoada Completa",
+          description: "O prato mais tradicional do Brasil",
+          prepTime: "180",
+          difficulty: "Média",
+          servings: "8 pessoas",
+          image: "/api/placeholder/400/300",
+          tags: ["Tradicional", "Festa", "Almoço"],
+          ingredients: [
+            "1kg de feijão preto",
+            "500g de carne seca",
+            "300g de linguiça defumada",
+            "200g de costelinha de porco",
+            "2 laranjas",
+            "Couve",
+            "Arroz branco",
+            "Farofa"
+          ],
+          steps: [
+            "Deixe o feijão de molho por 12 horas",
+            "Cozinhe o feijão na panela de pressão por 30 minutos",
+            "Adicione as carnes previamente dessalgadas",
+            "Cozinhe por mais 1 hora até as carnes ficarem macias",
+            "Sirva com arroz, couve refogada, laranja e farofa"
+          ]
+        },
+        {
+          id: 2,
+          title: "Pão de Queijo",
+          description: "A famosa receita mineira",
+          prepTime: "40",
+          difficulty: "Fácil",
+          servings: "20 unidades",
+          image: "/api/placeholder/400/300",
+          tags: ["Mineiro", "Café da manhã", "Lanche"],
+          ingredients: [
+            "500g de polvilho azedo",
+            "250ml de leite",
+            "125ml de óleo",
+            "2 ovos",
+            "300g de queijo meia cura ralado",
+            "Sal a gosto"
+          ],
+          steps: [
+            "Ferva o leite com o óleo",
+            "Escalde o polvilho com a mistura quente",
+            "Adicione os ovos e o queijo",
+            "Sove até formar uma massa homogênea",
+            "Faça bolinhas e asse por 25 minutos a 180°C"
+          ]
+        },
+        {
+          id: 3,
+          title: "Moqueca Baiana",
+          description: "Uma delícia de frutos do mar",
+          prepTime: "60",
+          difficulty: "Média",
+          servings: "6 pessoas",
+          image: "/api/placeholder/400/300",
+          tags: ["Baiana", "Frutos do Mar", "Jantar"],
+          ingredients: [
+            "1kg de peixe branco em postas",
+            "200ml de leite de coco",
+            "2 tomates",
+            "1 pimentão",
+            "1 cebola",
+            "Coentro",
+            "Azeite de dendê",
+            "Sal a gosto"
+          ],
+          steps: [
+            "Tempere o peixe com sal e limão",
+            "Refogue os vegetais no azeite de dendê",
+            "Adicione o peixe e o leite de coco",
+            "Cozinhe em fogo baixo por 30 minutos",
+            "Sirva com arroz branco"
+          ]
+        },
+        {
+          id: 4,
+          title: "Brigadeiro",
+          description: "O doce favorito das festas",
+          prepTime: "30",
+          difficulty: "Fácil",
+          servings: "20 unidades",
+          image: "/api/placeholder/400/300",
+          tags: ["Doce", "Festa", "Sobremesa"],
+          ingredients: [
+            "1 lata de leite condensado",
+            "2 colheres de sopa de chocolate em pó",
+            "1 colher de sopa de manteiga",
+            "Chocolate granulado"
+          ],
+          steps: [
+            "Misture o leite condensado, chocolate e manteiga em uma panela",
+            "Cozinhe em fogo baixo até desgrudar do fundo",
+            "Deixe esfriar, faça bolinhas e passe no granulado"
+          ]
+        },
+        {
+          id: 5,
+          title: "Coxinha",
+          description: "O salgado mais amado do Brasil",
+          prepTime: "90",
+          difficulty: "Média",
+          servings: "20 unidades",
+          image: "/api/placeholder/400/300",
+          tags: ["Salgado", "Lanche", "Festa"],
+          ingredients: [
+            "500g de peito de frango desfiado",
+            "500ml de caldo de galinha",
+            "2 xícaras de farinha de trigo",
+            "2 ovos",
+            "Farinha de rosca",
+            "Óleo para fritar"
+          ],
+          steps: [
+            "Cozinhe o frango e desfie",
+            "Prepare a massa com o caldo de galinha e farinha",
+            "Modele as coxinhas com o frango como recheio",
+            "Passe nos ovos e na farinha de rosca",
+            "Frite até dourar"
+          ]
+        },
+        {
+          id: 6,
+          title: "Vatapá",
+          description: "Um clássico da culinária baiana",
+          prepTime: "90",
+          difficulty: "Média",
+          servings: "6 pessoas",
+          image: "/api/placeholder/400/300",
+          tags: ["Baiano", "Almoço", "Festa"],
+          ingredients: [
+            "2 xícaras de farinha de trigo",
+            "1 litro de leite",
+            "200ml de leite de coco",
+            "200g de camarão seco",
+            "Coentro",
+            "Azeite de dendê",
+            "Amendoim e castanha triturados"
+          ],
+          steps: [
+            "Misture a farinha no leite e leve ao fogo",
+            "Adicione o leite de coco, dendê, camarão e coentro",
+            "Mexa até engrossar e sirva"
+          ]
+        },
+        {
+          id: 7,
+          title: "Acarajé",
+          description: "Bolinho de feijão recheado com vatapá",
+          prepTime: "120",
+          difficulty: "Alta",
+          servings: "10 unidades",
+          image: "/api/placeholder/400/300",
+          tags: ["Baiano", "Festa", "Tradicional"],
+          ingredients: [
+            "500g de feijão fradinho",
+            "2 cebolas",
+            "Azeite de dendê",
+            "Vatapá para rechear",
+            "Camarão seco"
+          ],
+          steps: [
+            "Deixe o feijão de molho e retire as cascas",
+            "Bata o feijão com cebola até formar uma massa",
+            "Modele os bolinhos e frite no dendê",
+            "Recheie com vatapá e camarão"
+          ]
+        },
+        {
+          id: 8,
+          title: "Canjica",
+          description: "Uma sobremesa típica das festas juninas",
+          prepTime: "60",
+          difficulty: "Fácil",
+          servings: "6 pessoas",
+          image: "/api/placeholder/400/300",
+          tags: ["Festa Junina", "Doce", "Sobremesa"],
+          ingredients: [
+            "500g de milho para canjica",
+            "1 litro de leite",
+            "1 lata de leite condensado",
+            "200ml de leite de coco",
+            "Canela em pau",
+            "Cravo"
+          ],
+          steps: [
+            "Deixe o milho de molho por 12 horas",
+            "Cozinhe na panela de pressão até amaciar",
+            "Adicione os leites, canela e cravo",
+            "Cozinhe até engrossar e sirva"
+          ]
+        },
+        {
+          id: 9,
+          title: "Bolo de Rolo",
+          description: "Um doce típico de Pernambuco",
+          prepTime: "120",
+          difficulty: "Alta",
+          servings: "12 pessoas",
+          image: "/api/placeholder/400/300",
+          tags: ["Pernambucano", "Doce", "Sobremesa"],
+          ingredients: [
+            "250g de farinha de trigo",
+            "250g de açúcar",
+            "250g de manteiga",
+            "6 ovos",
+            "Goiabada derretida"
+          ],
+          steps: [
+            "Bata a manteiga com o açúcar e os ovos",
+            "Adicione a farinha e misture",
+            "Asse camadas finas da massa",
+            "Recheie com goiabada e enrole como rocambole"
+          ]
+        },
+        {
+          id: 10,
+          title: "Tacacá",
+          description: "Uma iguaria da região amazônica",
+          prepTime: "90",
+          difficulty: "Média",
+          servings: "4 pessoas",
+          image: "/api/placeholder/400/300",
+          tags: ["Amazônico", "Típico", "Jantar"],
+          ingredients: [
+            "1 litro de tucupi",
+            "300g de goma de tapioca",
+            "200g de jambu",
+            "200g de camarão seco",
+            "Alho e sal"
+          ],
+          steps: [
+            "Ferva o tucupi com alho e sal",
+            "Cozinhe a goma de tapioca separadamente",
+            "Adicione o jambu e o camarão ao tucupi",
+            "Sirva com a goma no fundo da cuia"
+          ]
+        },
+        {
+          id: 11,
+          title: "Moqueca Baiana",
+          description: "Delicioso prato de frutos do mar típico do Nordeste",
+          prepTime: "90",
+          difficulty: "Média",
+          servings: "6 pessoas",
+          image: "/api/placeholder/400/300",
+          tags: ["Nordeste", "Frutos do Mar", "Almoço"],
+          ingredients: [
+            "1kg de peixe em postas (cação ou robalo)",
+            "200ml de leite de coco",
+            "2 tomates",
+            "1 pimentão",
+            "1 cebola",
+            "Coentro",
+            "Azeite de dendê",
+            "Sal e pimenta a gosto"
+          ],
+          steps: [
+            "Tempere o peixe com sal, pimenta e limão",
+            "Monte camadas de peixe, tomate, pimentão e cebola em uma panela",
+            "Adicione leite de coco e azeite de dendê",
+            "Cozinhe em fogo baixo por 30 minutos",
+            "Finalize com coentro e sirva com arroz"
+          ]
+        },
+        {
+          id: 12,
+          title: "Churrasco Gaúcho",
+          description: "O verdadeiro churrasco do Sul",
+          prepTime: "120",
+          difficulty: "Fácil",
+          servings: "10 pessoas",
+          image: "/api/placeholder/400/300",
+          tags: ["Sul", "Carne", "Festa"],
+          ingredients: [
+            "2kg de picanha",
+            "1kg de costela bovina",
+            "Sal grosso",
+            "Linguiças toscanas",
+            "Carvão para churrasco"
+          ],
+          steps: [
+            "Prepare a churrasqueira com carvão em brasa",
+            "Tempere as carnes com sal grosso",
+            "Coloque as carnes na grelha ou espetos",
+            "Asse até atingir o ponto desejado",
+            "Sirva com farofa, vinagrete e pão"
+          ]
+        },
+        {
+          id: 13,
+          title: "Camarão na Moranga",
+          description: "Um prato elegante e saboroso",
+          prepTime: "120",
+          difficulty: "Média",
+          servings: "6 pessoas",
+          image: "/api/placeholder/400/300",
+          tags: ["Frutos do Mar", "Almoço", "Jantar"],
+          ingredients: [
+            "1 moranga média",
+            "500g de camarões limpos",
+            "200ml de creme de leite",
+            "1 cebola",
+            "2 dentes de alho",
+            "1 tomate",
+            "Salsinha",
+            "Azeite",
+            "Sal e pimenta a gosto"
+          ],
+          steps: [
+            "Corte a tampa da moranga, retire as sementes e cozinhe até ficar macia",
+            "Refogue o alho e a cebola no azeite, adicione o tomate e os camarões",
+            "Acrescente o creme de leite e tempere a gosto",
+            "Recheie a moranga com o creme de camarão",
+            "Leve ao forno por 20 minutos e sirva"
+          ]
+        },
+        {
+          id: 14,
+          title: "Peixe Assado com Ervas",
+          description: "Simples e delicioso, ideal para um almoço leve",
+          prepTime: "60",
+          difficulty: "Fácil",
+          servings: "4 pessoas",
+          image: "/api/placeholder/400/300",
+          tags: ["Frutos do Mar", "Saudável", "Almoço"],
+          ingredients: [
+            "1 peixe inteiro (tilápia ou dourado)",
+            "Alecrim",
+            "Tomilho",
+            "Manjericão",
+            "2 limões",
+            "Azeite",
+            "Sal e pimenta a gosto"
+          ],
+          steps: [
+            "Limpe o peixe e tempere com sal, pimenta e limão",
+            "Recheie com ervas frescas e regue com azeite",
+            "Asse em forno pré-aquecido a 180°C por 40 minutos",
+            "Sirva com salada e legumes grelhados"
+          ]
+        },
+        {
+          id: 15,
+          title: "Risoto de Frutos do Mar",
+          description: "Um prato sofisticado que impressiona",
+          prepTime: "80",
+          difficulty: "Média",
+          servings: "4 pessoas",
+          image: "/api/placeholder/400/300",
+          tags: ["Frutos do Mar", "Jantar", "Sofisticado"],
+          ingredients: [
+            "300g de arroz arbóreo",
+            "200g de camarões",
+            "100g de lula em anéis",
+            "100g de mexilhões",
+            "1 cebola",
+            "1 dente de alho",
+            "Caldo de peixe",
+            "Azeite",
+            "Parmesão ralado",
+            "Sal e pimenta a gosto"
+          ],
+          steps: [
+            "Refogue o alho e a cebola no azeite",
+            "Adicione o arroz e mexa até ficar translúcido",
+            "Adicione os frutos do mar e aos poucos o caldo de peixe quente",
+            "Mexa constantemente até o arroz cozinhar",
+            "Finalize com parmesão e sirva imediatamente"
+          ]
+        },
+        {
+          id: 16,
+          title: "Caldeirada de Frutos do Mar",
+          description: "Um clássico da culinária praiana brasileira",
+          prepTime: "90",
+          difficulty: "Média",
+          servings: "6 pessoas",
+          image: "/api/placeholder/400/300",
+          tags: ["Frutos do Mar", "Praia", "Almoço"],
+          ingredients: [
+            "500g de peixe em postas",
+            "200g de camarões",
+            "200g de lula",
+            "100g de mexilhões",
+            "1 pimentão",
+            "2 tomates",
+            "1 cebola",
+            "200ml de leite de coco",
+            "Azeite de dendê",
+            "Coentro",
+            "Sal e pimenta a gosto"
+          ],
+          steps: [
+            "Tempere os frutos do mar com sal, pimenta e limão",
+            "Refogue os legumes no azeite de dendê",
+            "Adicione os frutos do mar e o leite de coco",
+            "Cozinhe em fogo baixo até os sabores se incorporarem",
+            "Finalize com coentro e sirva com arroz"
+          ]
+        },
+        {
+          id: 17,
+          title: "Bobó de Camarão",
+          description: "Um prato cremoso e cheio de sabor",
+          prepTime: "120",
+          difficulty: "Média",
+          servings: "6 pessoas",
+          image: "/api/placeholder/400/300",
+          tags: ["Frutos do Mar", "Tradicional", "Almoço"],
+          ingredients: [
+            "500g de camarões",
+            "500g de mandioca",
+            "200ml de leite de coco",
+            "1 cebola",
+            "2 dentes de alho",
+            "1 tomate",
+            "Azeite de dendê",
+            "Coentro",
+            "Sal e pimenta a gosto"
+          ],
+          steps: [
+            "Cozinhe a mandioca até ficar macia e bata no liquidificador com leite de coco",
+            "Refogue o alho, a cebola e o tomate no azeite de dendê",
+            "Adicione os camarões e cozinhe até ficarem rosados",
+            "Misture o creme de mandioca com os camarões",
+            "Finalize com coentro e sirva"
+          ]
+        },
+        {
+          id: 18,
+          title: "Ceviche de Peixe Branco",
+          description: "Uma entrada fresca e leve",
+          prepTime: "30",
+          difficulty: "Fácil",
+          servings: "4 pessoas",
+          image: "/api/placeholder/400/300",
+          tags: ["Frutos do Mar", "Fresco", "Entrada"],
+          ingredients: [
+            "400g de peixe branco (robalo ou tilápia)",
+            "1 cebola roxa",
+            "2 limões",
+            "Coentro",
+            "Pimenta dedo-de-moça",
+            "Sal a gosto"
+          ],
+          steps: [
+            "Corte o peixe em cubos pequenos",
+            "Adicione a cebola fatiada, coentro picado e pimenta",
+            "Tempere com sal e suco de limão",
+            "Deixe marinar por 15 minutos e sirva fresco"
+          ]
+        },
+        {
+          id: 19,
+          title: "Salmão Grelhado com Limão e Ervas",
+          description: "Uma receita saudável e deliciosa",
+          prepTime: "30",
+          difficulty: "Fácil",
+          servings: "4 pessoas",
+          image: "/api/placeholder/400/300",
+          tags: ["Saudável", "Jantar", "Peixe"],
+          ingredients: [
+            "4 filés de salmão",
+            "2 limões",
+            "Alecrim fresco",
+            "Tomilho fresco",
+            "Azeite de oliva",
+            "Sal e pimenta a gosto"
+          ],
+          steps: [
+            "Tempere os filés de salmão com sal, pimenta, suco de limão e ervas frescas",
+            "Aqueça uma grelha ou frigideira antiaderente com azeite",
+            "Grelhe o salmão por 4 minutos de cada lado até dourar",
+            "Sirva com legumes grelhados ou salada"
+          ]
+        },
+        {
+          id: 20,
+          title: "Filé Mignon ao Molho de Vinho",
+          description: "Um prato sofisticado para ocasiões especiais",
+          prepTime: "60",
+          difficulty: "Média",
+          servings: "4 pessoas",
+          image: "/api/placeholder/400/300",
+          tags: ["Carne", "Jantar", "Sofisticado"],
+          ingredients: [
+            "4 medalhões de filé mignon",
+            "200ml de vinho tinto",
+            "1 cebola roxa",
+            "2 dentes de alho",
+            "1 colher de sopa de manteiga",
+            "Azeite",
+            "Sal e pimenta a gosto"
+          ],
+          steps: [
+            "Tempere os medalhões com sal e pimenta",
+            "Aqueça uma frigideira com azeite e sele os medalhões dos dois lados",
+            "Retire a carne e reserve",
+            "Na mesma frigideira, refogue a cebola e o alho na manteiga",
+            "Adicione o vinho e deixe reduzir até formar um molho espesso",
+            "Sirva o molho sobre os medalhões"
+          ]
+        },
+        {
+          id: 21,
+          title: "Lagarto ao Molho Madeira",
+          description: "Um clássico da culinária brasileira",
+          prepTime: "120",
+          difficulty: "Média",
+          servings: "6 pessoas",
+          image: "/api/placeholder/400/300",
+          tags: ["Carne", "Tradicional", "Jantar"],
+          ingredients: [
+            "1kg de lagarto",
+            "200ml de vinho madeira",
+            "1 cebola",
+            "2 dentes de alho",
+            "1 colher de sopa de manteiga",
+            "1 colher de sopa de farinha de trigo",
+            "Sal e pimenta a gosto"
+          ],
+          steps: [
+            "Tempere o lagarto com sal e pimenta",
+            "Sele a carne em uma panela com azeite até dourar por completo",
+            "Retire a carne e reserve",
+            "Na mesma panela, refogue a cebola e o alho na manteiga",
+            "Adicione a farinha e mexa até formar um roux",
+            "Acrescente o vinho madeira e mexa até engrossar",
+            "Coloque a carne de volta, tampe e cozinhe por 1 hora em fogo baixo"
+          ]
+        },
+        {
+          id: 22,
+          title: "Torta de Limão",
+          description: "Uma sobremesa refrescante e irresistível",
+          prepTime: "60",
+          difficulty: "Fácil",
+          servings: "8 porções",
+          image: "/api/placeholder/400/300",
+          tags: ["Sobremesa", "Doce", "Festa"],
+          ingredients: [
+            "200g de biscoito maisena",
+            "100g de manteiga",
+            "1 lata de leite condensado",
+            "200ml de creme de leite",
+            "Suco de 3 limões",
+            "Raspas de limão para decorar"
+          ],
+          steps: [
+            "Triture os biscoitos e misture com a manteiga derretida",
+            "Forre uma forma de torta com a mistura e leve ao forno por 10 minutos",
+            "Misture o leite condensado, creme de leite e suco de limão até ficar homogêneo",
+            "Despeje sobre a base assada e leve à geladeira por 2 horas",
+            "Decore com raspas de limão antes de servir"
+          ]
+        },
+        {
+          id: 23,
+          title: "Ceia de Natal Completa",
+          description: "Os clássicos de Natal em um único prato",
+          prepTime: "240",
+          difficulty: "Média",
+          servings: "10 pessoas",
+          image: "/api/placeholder/400/300",
+          tags: ["Festa", "Natal", "Especial"],
+          ingredients: [
+            "1 peru inteiro",
+            "500g de farofa",
+            "200g de frutas secas",
+            "1 lata de abacaxi em calda",
+            "200ml de vinho branco",
+            "Temperos a gosto"
+          ],
+          steps: [
+            "Tempere o peru com vinho branco, alho, sal e pimenta e deixe marinando por 12 horas",
+            "Asse em forno pré-aquecido a 180°C por 3 horas, regando com a marinada",
+            "Prepare a farofa com frutas secas e sirva como acompanhamento",
+            "Decore com rodelas de abacaxi e frutas"
+          ]
+        },
+        {
+          id: 24,
+          title: "Frango Assado com Batatas",
+          description: "Um clássico para o almoço de domingo",
+          prepTime: "120",
+          difficulty: "Fácil",
+          servings: "6 pessoas",
+          image: "/api/placeholder/400/300",
+          tags: ["Frango", "Almoço", "Tradicional"],
+          ingredients: [
+            "1 frango inteiro",
+            "1kg de batatas",
+            "2 limões",
+            "Alecrim fresco",
+            "Manteiga",
+            "Sal e pimenta a gosto"
+          ],
+          steps: [
+            "Tempere o frango com sal, pimenta, limão e alecrim",
+            "Coloque o frango em uma assadeira e espalhe as batatas ao redor",
+            "Pincele o frango com manteiga e leve ao forno a 180°C por 2 horas",
+            "Sirva com salada verde"
+          ]
+        },
+        {
+          id: 25,
+          title: "Frango com Quiabo",
+          description: "Um prato tradicional da culinária mineira",
+          prepTime: "90",
+          difficulty: "Fácil",
+          servings: "6 pessoas",
+          image: "/api/placeholder/400/300",
+          tags: ["Mineiro", "Frango", "Almoço"],
+          ingredients: [
+            "1kg de frango em pedaços",
+            "500g de quiabo",
+            "1 cebola",
+            "2 dentes de alho",
+            "Colorau",
+            "Sal e pimenta a gosto"
+          ],
+          steps: [
+            "Tempere o frango com sal, pimenta e colorau",
+            "Refogue o frango com alho e cebola até dourar",
+            "Adicione o quiabo cortado e mexa até soltar a 'baba'",
+            "Cozinhe até o quiabo e o frango ficarem macios",
+            "Sirva com arroz branco"
+          ]
+        },
+        {
+          id: 26,
+          title: "Brigadeiro",
+          description: "O doce brasileiro mais amado",
+          prepTime: "30",
+          difficulty: "Fácil",
+          servings: "30 unidades",
+          image: "/api/placeholder/400/300",
+          tags: ["Doce", "Chocolate", "Festa"],
+          ingredients: [
+            "1 lata de leite condensado",
+            "2 colheres de sopa de manteiga",
+            "4 colheres de sopa de chocolate em pó",
+            "Granulado para decorar"
+          ],
+          steps: [
+            "Misture o leite condensado, a manteiga e o chocolate em uma panela",
+            "Cozinhe em fogo baixo, mexendo sempre, até desgrudar do fundo",
+            "Deixe esfriar, modele bolinhas e passe no granulado"
+          ]
+        },
+        {
+          id: 27,
+          title: "Cuscuz Nordestino",
+          description:
+            "Tradicional acompanhamento do café da manhã no Nordeste",
+          prepTime: "20",
+          difficulty: "Fácil",
+          servings: "4 pessoas",
+          image: "/api/placeholder/400/300",
+          tags: ["Nordestino", "Milho", "Café da Manhã"],
+          ingredients: [
+            "2 xícaras de flocos de milho",
+            "1 xícara de água",
+            "Sal a gosto"
+          ],
+          steps: [
+            "Misture os flocos de milho com água e sal",
+            "Deixe hidratar por 10 minutos",
+            "Coloque em uma cuscuzeira e cozinhe por 10 minutos",
+            "Sirva com manteiga ou queijo coalho"
+          ]
+        },
+        {
+          id: 28,
+          title: "Arroz de Carreteiro",
+          description: "Um prato rústico e delicioso do sul do Brasil",
+          prepTime: "60",
+          difficulty: "Fácil",
+          servings: "6 pessoas",
+          image: "/api/placeholder/400/300",
+          tags: ["Sulista", "Tradicional", "Arroz"],
+          ingredients: [
+            "2 xícaras de arroz",
+            "300g de carne-seca desfiada",
+            "1 cebola",
+            "2 dentes de alho",
+            "1 tomate",
+            "Cheiro-verde a gosto",
+            "Sal e pimenta a gosto"
+          ],
+          steps: [
+            "Refogue a carne-seca com alho, cebola e tomate",
+            "Adicione o arroz e refogue bem",
+            "Cubra com água e cozinhe até o arroz ficar macio",
+            "Finalize com cheiro-verde e sirva"
+          ]
+        },
+        {
+          id: 29,
+          title: "Cuscuz Nordestino",
+          description: "Um acompanhamento versátil e fácil de preparar",
+          prepTime: "20",
+          difficulty: "Fácil",
+          servings: "4 pessoas",
+          image: "/api/placeholder/400/300",
+          tags: ["Nordestino", "Acompanhamento", "Café da Manhã"],
+          ingredients: [
+            "2 xícaras de flocos de milho",
+            "1 xícara de água",
+            "Sal a gosto",
+            "Manteiga para servir"
+          ],
+          steps: [
+            "Misture os flocos de milho com água e sal até hidratar",
+            "Coloque a mistura na cuscuzeira e cozinhe no vapor por 15 minutos",
+            "Sirva com manteiga ou outros acompanhamentos de sua preferência"
+          ]
+        },
+        {
+          id: 30,
+          title: "Tapioca",
+          description: "Versátil iguaria brasileira",
+          prepTime: "10",
+          difficulty: "Fácil",
+          servings: "4 unidades",
+          image: "/api/placeholder/400/300",
+          tags: ["Nordestino", "Lanche", "Rápido"],
+          ingredients: [
+            "2 xícaras de goma de tapioca",
+            "Recheio a gosto (queijo, coco, leite condensado)"
+          ],
+          steps: [
+            "Peneire a goma de tapioca",
+            "Aqueça uma frigideira e espalhe a goma uniformemente",
+            "Deixe firmar e vire",
+            "Adicione o recheio e dobre ao meio"
+          ]
+        },
+        {
+          id: 31,
+          title: "Baião de Dois",
+          description: "Prato nordestino com arroz e feijão verde",
+          prepTime: "40",
+          difficulty: "Fácil",
+          servings: "6 pessoas",
+          image: "/api/placeholder/400/300",
+          tags: ["Nordestino", "Feijão", "Arroz"],
+          ingredients: [
+            "2 xícaras de arroz",
+            "2 xícaras de feijão verde",
+            "200g de carne seca",
+            "Queijo coalho",
+            "Cebolinha",
+            "Sal a gosto"
+          ],
+          steps: [
+            "Cozinhe o arroz e o feijão separadamente",
+            "Refogue a carne seca e misture com o arroz e o feijão",
+            "Adicione pedaços de queijo coalho e deixe derreter",
+            "Finalize com cebolinha"
+          ]
+        },
+        {
+          id: 32,
+          title: "Bolinho de Chuva",
+          description: "Doce simples e nostálgico",
+          prepTime: "20",
+          difficulty: "Fácil",
+          servings: "20 unidades",
+          image: "/api/placeholder/400/300",
+          tags: ["Doce", "Frito", "Rápido"],
+          ingredients: [
+            "2 xícaras de farinha de trigo",
+            "1 xícara de leite",
+            "1 ovo",
+            "3 colheres de sopa de açúcar",
+            "1 colher de sopa de fermento",
+            "Açúcar e canela para polvilhar"
+          ],
+          steps: [
+            "Misture todos os ingredientes até formar uma massa homogênea",
+            "Frite colheradas da massa em óleo quente",
+            "Escorra em papel-toalha e polvilhe açúcar e canela"
+          ]
+        },
+        {
+          id: 33,
+          title: "Salpicão",
+          description:
+            "Um prato refrescante e colorido, perfeito para ocasiões especiais",
+          prepTime: "30",
+          difficulty: "Fácil",
+          servings: "6 pessoas",
+          image: "/api/placeholder/400/300",
+          tags: ["Frio", "Acompanhamento", "Festa"],
+          ingredients: [
+            "2 peitos de frango cozidos e desfiados",
+            "2 cenouras raladas",
+            "1 lata de milho verde",
+            "1 lata de ervilha",
+            "1 maçã verde picada",
+            "100g de uva-passa",
+            "200g de batata palha",
+            "200g de maionese",
+            "Suco de 1 limão",
+            "Sal e pimenta a gosto"
+          ],
+          steps: [
+            "Em uma tigela grande, misture o frango desfiado, a cenoura, o milho, a ervilha, a maçã e a uva-passa",
+            "Tempere com sal, pimenta e suco de limão",
+            "Adicione a maionese e misture bem até incorporar todos os ingredientes",
+            "Antes de servir, finalize com a batata palha por cima para dar crocância",
+            "Sirva gelado como acompanhamento ou prato principal"
+          ]
+        }
+      ];
+
+      function createRecipeCard(recipe) {
+        return `
+                      <div class="col-md-4">
+                          <div class="recipe-card" onclick="showRecipeDetails(${
+                            recipe.id
+                          })">
+                              <img src="${recipe.image}" alt="${
+          recipe.title
+        }" class="recipe-image w-100">
+                              <div class="recipe-info">
+                                  <h3>${recipe.title}</h3>
+                                  <p>${recipe.description}</p>
+                                  <div class="recipe-tags">
+                                      ${recipe.tags
+                                        .map(
+                                          (tag) =>
+                                            `<span class="recipe-tag">${tag}</span>`
+                                        )
+                                        .join("")}
+                                  </div>
+                                  <div class="recipe-time">
+                                      <i class="far fa-clock"></i> ${
+                                        recipe.prepTime
+                                      } minutos
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  `;
+      }
+
+      function showRecipeDetails(recipeId) {
+        const recipe = recipes.find((r) => r.id === recipeId);
+        const modal = new bootstrap.Modal(
+          document.getElementById("recipeModal")
+        );
+
+        document.querySelector(".modal-title").textContent = recipe.title;
+        document.querySelector(".modal-body").innerHTML = `
+                      <img src="${recipe.image}" alt="${
+          recipe.title
+        }" class="w-100 mb-4" style="max-height: 300px; object-fit: cover;">
+                      <div class="row mb-4">
+                          <div class="col-md-4">
+                              <strong><i class="far fa-clock"></i> Tempo:</strong> ${
+                                recipe.prepTime
+                              } minutos
+                          </div>
+                          <div class="col-md-4">
+                              <strong><i class="fas fa-signal"></i> Dificuldade:</strong> ${
+                                recipe.difficulty
+                              }
+                          </div>
+                          <div class="col-md-4">
+                              <strong><i class="fas fa-users"></i> Serve:</strong> ${
+                                recipe.servings
+                              }
+                          </div>
+                      </div>
+                      <h4>Ingredientes</h4>
+                      <ul class="ingredients-list">
+                          ${recipe.ingredients
+                            .map(
+                              (ingredient) =>
+                                `<li><i class="fas fa-check text-success"></i> ${ingredient}</li>`
+                            )
+                            .join("")}
+                      </ul>
+                      <h4>Modo de Preparo</h4>
+                      <ol class="steps-list">
+                          ${recipe.steps
+                            .map((step) => `<li>${step}</li>`)
+                            .join("")}
+                      </ol>
+                  `;
+
+        modal.show();
+      }
+
+      // Initialize recipe cards
+      document.getElementById("recipes-container").innerHTML = recipes
+        .map((recipe) => createRecipeCard(recipe))
+        .join("");
+    </script>
+  </body>
+</html>
