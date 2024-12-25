@@ -11,7 +11,9 @@
       name="keywords"
       content="receitas brasileiras, comida brasileira, culinária brasileira, feijoada, moqueca, pão de queijo"
     />
+    <meta name="google-adsense-account" content="ca-pub-4380048250667651" />
     <title>Sabores do Brasil - Receitas Típicas Brasileiras</title>
+
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css"
       rel="stylesheet"
@@ -20,96 +22,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
       rel="stylesheet"
     />
-    <style>
-      :root {
-        --primary-color: #2c8b3c;
-        --secondary-color: #ffc107;
-        --text-color: #333;
-      }
-
-      body {
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        color: var(--text-color);
-        line-height: 1.6;
-      }
-
-      .hero-section {
-        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-          url("/api/placeholder/1200/400");
-        background-size: cover;
-        background-position: center;
-        color: white;
-        padding: 100px 0;
-        margin-bottom: 40px;
-      }
-
-      .recipe-card {
-        border-radius: 15px;
-        overflow: hidden;
-        transition: transform 0.3s ease;
-        margin-bottom: 30px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-      }
-
-      .recipe-card:hover {
-        transform: translateY(-5px);
-      }
-
-      .recipe-image {
-        height: 200px;
-        object-fit: cover;
-      }
-
-      .recipe-info {
-        padding: 20px;
-      }
-
-      .recipe-tags {
-        margin: 10px 0;
-      }
-
-      .recipe-tag {
-        background-color: var(--secondary-color);
-        color: #000;
-        padding: 5px 10px;
-        border-radius: 20px;
-        font-size: 0.8em;
-        margin-right: 5px;
-      }
-
-      .recipe-time {
-        color: var(--primary-color);
-        font-weight: bold;
-      }
-
-      .recipe-modal .modal-content {
-        border-radius: 15px;
-      }
-
-      .ingredients-list {
-        list-style-type: none;
-        padding-left: 0;
-      }
-
-      .ingredients-list li {
-        padding: 5px 0;
-        border-bottom: 1px solid #eee;
-      }
-
-      .steps-list {
-        padding-left: 20px;
-      }
-
-      .steps-list li {
-        margin-bottom: 15px;
-      }
-
-      @media (max-width: 768px) {
-        .hero-section {
-          padding: 50px 0;
-        }
-      }
-    </style>
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <!-- Navbar -->
@@ -135,6 +48,9 @@
             <li class="nav-item">
               <a class="nav-link" href="#contato">Contato</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#contato">Política de Privacidade</a>
+            </li>
           </ul>
         </div>
       </div>
@@ -152,7 +68,7 @@
 
     <!-- Recipes Section -->
     <section id="receitas" class="container mb-5">
-      <h2 class="text-center mb-4">Top 10 Receitas Brasileiras</h2>
+      <h2 class="text-center mb-4">Melhores Receitas Brasileiras</h2>
       <div class="row" id="recipes-container">
         <!-- Recipes will be inserted here by JavaScript -->
       </div>
@@ -176,6 +92,66 @@
         </div>
       </div>
     </div>
+
+    <section id="sobre" class="container mt-5">
+      <h2>Sobre Nós</h2>
+      <p>
+        O Sabores Brasil é um site dedicado a compartilhar as melhores receitas
+        brasileiras. Nossa missão é preservar a cultura culinária do Brasil,
+        oferecendo receitas que vão de pratos tradicionais a inovações modernas.
+      </p>
+    </section>
+
+    <section id="contato" class="container mt-5">
+      <h2>Contato</h2>
+      <form>
+        <div class="form-group">
+          <label for="nome">Nome:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="nome"
+            placeholder="Seu nome"
+          />
+        </div>
+        <div class="form-group">
+          <label for="email">E-mail:</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            placeholder="Seu e-mail"
+          />
+        </div>
+        <div class="form-group">
+          <label for="mensagem">Mensagem:</label>
+          <textarea
+            class="form-control"
+            id="mensagem"
+            rows="4"
+            placeholder="Escreva sua mensagem"
+          ></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Enviar</button>
+      </form>
+    </section>
+
+    <section id="politica" class="container mt-5">
+      <h2>Política de Privacidade</h2>
+      <p>
+        Respeitamos sua privacidade e estamos comprometidos em proteger suas
+        informações pessoais. Para saber mais sobre como tratamos os seus dados,
+        consulte nossa <a href="politica.html">Política de Privacidade</a>.
+      </p>
+    </section>
+
+    <footer class="bg-light text-center py-3">
+      <p>&copy; 2024 Sabores Brasil. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
     <script>
@@ -1108,7 +1084,10 @@
         .map((recipe) => createRecipeCard(recipe))
         .join("");
     </script>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4380048250667651"
-     crossorigin="anonymous"></script>
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4380048250667651"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>
